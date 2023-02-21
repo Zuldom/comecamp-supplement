@@ -4,6 +4,7 @@ import {
   IQuery,
   IQueryFetchUseditemArgs,
 } from "../../../../src/commons/types/generated/types";
+import { useAuth } from "../../../../src/component/commons/hooks/custom/useAuth";
 import ProductWrite from "../../../../src/component/unit/product/write/ProductWrite.index";
 
 const FETCH_USED_ITEM = gql`
@@ -27,6 +28,7 @@ const FETCH_USED_ITEM = gql`
 
 export default function ProductEditPage() {
   const router = useRouter();
+  useAuth();
   const { data } = useQuery<
     Pick<IQuery, "fetchUseditem">,
     IQueryFetchUseditemArgs

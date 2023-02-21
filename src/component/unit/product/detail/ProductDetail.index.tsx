@@ -1,7 +1,6 @@
 import * as S from "./ProductDetail.styles";
 import { PriceReg } from "../../../../commons/library/util";
 import { useEffect, useState } from "react";
-import ProductComment from "../comment/ProductComment.index";
 import { useFetchUseditem } from "../../../commons/hooks/query/useFetchUseditem";
 import { useRouter } from "next/router";
 import { useToggleUseditemPick } from "../../../commons/hooks/mutation/useToggleUseditemPick";
@@ -9,6 +8,7 @@ import { v4 as uuidv4 } from "uuid";
 import { useCreatePointTransactionOfBuyingAndSelling } from "../../../commons/hooks/mutation/useCreatePointTransactionOfBuyingAndSelling";
 import { useDeleteUseditem } from "../../../commons/hooks/mutation/useDeleteUseditem";
 import { useMoveToPage } from "../../../commons/hooks/custom/useMoveToPage";
+import ProductComment from "../comment/list/CommentList.index";
 
 export default function ProductDetail() {
   const router = useRouter();

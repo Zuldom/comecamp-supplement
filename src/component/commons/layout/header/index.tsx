@@ -18,7 +18,7 @@ export default function Header(props: IProps) {
   const staticBrand = [
     {
       name: "BRAND",
-      url: "/products",
+      url: "/",
     },
     {
       name: "CATEGORY",

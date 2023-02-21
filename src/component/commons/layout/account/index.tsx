@@ -14,7 +14,7 @@ export default function AccountHeader(props: IProps) {
   const staticBrand = [
     {
       name: "BRAND",
-      url: "/products",
+      url: "/",
     },
     {
       name: "CATEGORY",
@@ -45,7 +45,7 @@ export default function AccountHeader(props: IProps) {
     },
     {
       name: "BEST",
-      url: "/products",
+      url: "/",
     },
   ];
 

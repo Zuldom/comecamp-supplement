@@ -4,6 +4,7 @@ import {
   IMutation,
   IMutationCreateUseditemArgs,
 } from "../../../../commons/types/generated/types";
+import { FETCH_USED_ITEMS } from "../query/useFetchUseditems";
 
 const CREATE_USED_ITEM = gql`
   mutation createUseditem($createUseditemInput: CreateUseditemInput!) {
@@ -38,6 +39,14 @@ export const useCreateUsedItem = () => {
             images: resultUrls,
           },
         },
+        refetchQueries: [
+          {
+            query: FETCH_USED_ITEMS,
+            variables: {
+              page: 1,
+            },
+          },
+        ],
       });
       console.log(result.data);
       void router.push(
