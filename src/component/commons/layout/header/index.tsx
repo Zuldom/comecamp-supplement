@@ -18,29 +18,29 @@ export default function Header(props: IProps) {
   const staticBrand = [
     {
       name: "BRAND",
-      url: "/",
+      url: "/products",
     },
     {
       name: "CATEGORY",
-      url: "/",
+      url: "/products",
     },
     {
       name: "LIFE",
-      url: "/",
+      url: "/products",
     },
     {
       name: "BEAUTY",
-      url: "/",
+      url: "/products",
     },
   ];
   const dynamicProduct = [
     {
       name: "#STYLE",
-      url: "/",
+      url: "/products",
     },
     {
       name: "EVENT",
-      url: "/",
+      url: "/products",
     },
   ];
 

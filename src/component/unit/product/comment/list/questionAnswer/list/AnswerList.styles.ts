@@ -21,4 +21,5 @@ export const ReplyDate = styled.div`
 export const ReplyContent = styled.div`
   font-weight: 400;
   font-size: 15px;
+  padding-bottom: 15px;
 `;

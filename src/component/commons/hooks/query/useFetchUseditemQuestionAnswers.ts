@@ -5,7 +5,7 @@ import {
   IQueryFetchUseditemQuestionAnswersArgs,
 } from "../../../../commons/types/generated/types";
 
-const FETCH_USED_ITEM_QUESTION_ANSWERS = gql`
+export const FETCH_USED_ITEM_QUESTION_ANSWERS = gql`
   query fetchUseditemQuestionAnswers($page: Int, $useditemQuestionId: ID!) {
     fetchUseditemQuestionAnswers(
       page: $page

@@ -14,7 +14,7 @@ export const QandAInnerWrapper = styled.div`
 `;
 
 export const CommentWrapper = styled.div`
-  padding: 39px 0 39px 10px;
+  padding: 39px 0 5px 10px;
   border-top: 1px solid #c0c0c0;
   display: flex;
   border-bottom: 1px solid #c0c0c0;

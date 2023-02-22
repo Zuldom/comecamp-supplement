@@ -1,7 +1,6 @@
 import styled from "@emotion/styled";
 
-export const ReplyTextBox = styled.div<{ isReply: boolean }>`
-  display: ${(props) => (props.answer ? "" : "none")};
+export const ReplyTextBox = styled.form`
   border-top: 1px dashed #c0c0c0;
   padding-top: 21px;
   margin-top: 21px;

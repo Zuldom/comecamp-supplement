@@ -1,7 +1,8 @@
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import { getDate } from "../../../../../../../commons/library/util";
 import { useFetchUseditemQuestionAnswers } from "../../../../../../commons/hooks/query/useFetchUseditemQuestionAnswers";
+import { useFetchUseditemQuestions } from "../../../../../../commons/hooks/query/useFetchUseditemQuestions";
 import { WriteBtn } from "../../../write/CommentWrite.styles";
 import AnswerWrite from "../write/AnswerWrite.index";
 import * as S from "./AnswerList.styles";
@@ -17,14 +18,14 @@ export default function QuestionAnswer(props: IProps) {
   console.log(data?.fetchUseditemQuestionAnswers);
 
   return (
-    <S.ReplyWrapper>
-      <S.ReplyTitle>답변</S.ReplyTitle>
-      <S.ReplyDate>{getDate(props.createdAt)}</S.ReplyDate>
+    <>
       {data?.fetchUseditemQuestionAnswers?.map((el) => (
-        <S.ReplyContent key={el._id}>{el?.contents}</S.ReplyContent>
+        <S.ReplyWrapper key={el._id}>
+          <S.ReplyTitle>답변</S.ReplyTitle>
+          <S.ReplyDate>{getDate(el.createdAt)}</S.ReplyDate>
+          <S.ReplyContent>{el?.contents}</S.ReplyContent>
+        </S.ReplyWrapper>
       ))}
-
-      <AnswerWrite useditemQuestionId={props.useditemQuestionId} />
-    </S.ReplyWrapper>
+    </>
   );
 }
