@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useCreateQuestionAnswer } from "../../../../../../commons/hooks/mutation/useCreateQuestionAnswer";
 import { useUpdateQuestionAnswer } from "../../../../../../commons/hooks/mutation/useUpdateQuestionAnswer";
@@ -15,24 +16,64 @@ export default function AnswerWrite(props) {
   const { updateQuestionAnswer } = useUpdateQuestionAnswer();
 
   const onClickSubmit = (data) => {
-    void createSubmit(data, props.useditemQuestionId);
+    if (props.isEditReply === true) {
+      void updateQuestionAnswer(data, props.QuestionAnswerId);
+      props.setIsEditReply(false);
+    } else {
+      void createSubmit(data, props.useditemQuestionId);
+      props.setIsReply((prev) => !prev);
+    }
   };
+
+  useEffect(() => {
+    if (props.defaultValue) {
+      const resetData = {
+        contents: props.defaultValue,
+      };
+      reset({ ...resetData });
+    }
+  }, [props.defaultValue]);
 
   return (
     <>
-      <S.ReplyTextBox
-        id={props.useditemQuestionId}
-        onSubmit={handleSubmit(onClickSubmit)}
-      >
-        <S.ReplyTextarea
-          placeholder="내용을 입력해주세요"
-          {...register("contents")}
-        />
-        <S.ReplyBtnBox>
-          <S.CancleBtn type="button">취소하기</S.CancleBtn>
-          <WriteBtn>작성하기</WriteBtn>
-        </S.ReplyBtnBox>
-      </S.ReplyTextBox>
+      {props.isEditRelply ? (
+        <>
+          <S.ReplyTextBox onSubmit={handleSubmit(onClickSubmit)}>
+            <S.ReplyTextarea
+              placeholder="내용을 입력해주세요"
+              {...register("contents")}
+              defaultValue={props.defaultValue}
+            />
+            <S.ReplyBtnBox>
+              <S.CancleBtn type="button">취소하기</S.CancleBtn>
+              <WriteBtn>수정하기</WriteBtn>
+            </S.ReplyBtnBox>
+          </S.ReplyTextBox>
+        </>
+      ) : (
+        <>
+          <S.ReplyTextBox onSubmit={handleSubmit(onClickSubmit)}>
+            <S.ReplyTextarea
+              placeholder="내용을 입력해주세요"
+              {...register("contents")}
+              defaultValue={props.defaultValue}
+            />
+            <S.ReplyBtnBox>
+              <S.CancleBtn
+                type="button"
+                onClick={
+                  props.isEditReply
+                    ? () => props.setIsEditRelply(false)
+                    : props.onClickReply("")
+                }
+              >
+                취소하기
+              </S.CancleBtn>
+              <WriteBtn>작성하기</WriteBtn>
+            </S.ReplyBtnBox>
+          </S.ReplyTextBox>
+        </>
+      )}
     </>
   );
 }

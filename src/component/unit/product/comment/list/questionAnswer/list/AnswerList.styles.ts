@@ -23,3 +23,8 @@ export const ReplyContent = styled.div`
   font-size: 15px;
   padding-bottom: 15px;
 `;
+
+export const IconBox = styled.div`
+  display: flex;
+  gap: 40px;
+`;

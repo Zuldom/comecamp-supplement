@@ -1,12 +1,10 @@
-/* global kakao */
-import React, { useEffect, useState, useRef, useMemo } from "react";
+import React, { useEffect, useState, useRef } from "react";
 
 declare const window: typeof globalThis & {
   kakao: any;
 };
 
 export default function KakaoMap(props) {
-  // const { markerPositions, size } = props;
   const [kakaoMap, setKakaoMap] = useState(null);
   const [infowindow, setInfoWindow] = useState(null);
   const [kakaoMarker, setKakaoMarker] = useState(null);
@@ -36,14 +34,8 @@ export default function KakaoMap(props) {
           position: center,
         });
         setKakaoMarker(marker);
-        // setMapCenter(center);
         setInfoWindow(infowindow);
         setKakaoMap(map);
-
-        // if (!isDynamic) {
-        //   map.setDraggable(false);
-        //   map.setZoomable(false);
-        // }
       });
     };
   }, [container]);

@@ -1,4 +1,5 @@
 import { gql, useMutation } from "@apollo/client";
+import { Modal } from "antd";
 import { useRouter } from "next/router";
 import {
   IMutation,
@@ -30,8 +31,8 @@ export const useUpdateQuestionAnswer = () => {
 
   const updateQuestionAnswer = async (
     data,
-    useditemQuestionAnswerId,
-    useditemQuestionId
+    useditemQuestionAnswerId
+    // useditemQuestionId
   ) => {
     try {
       await updateUseditemQuestionAnswer({
@@ -41,16 +42,17 @@ export const useUpdateQuestionAnswer = () => {
           },
           useditemQuestionAnswerId,
         },
-        refetchQueries: [
-          {
-            query: FETCH_USED_ITEM_QUESTION_ANSWERS,
-            variables: {
-              page: Number(1),
-              useditemQuestionId,
-            },
-          },
-        ],
+        // refetchQueries: [
+        //   {
+        //     query: FETCH_USED_ITEM_QUESTION_ANSWERS,
+        //     variables: {
+        //       page: Number(1),
+        //       useditemQuestionId,
+        //     },
+        //   },
+        // ],
       });
+      Modal.success({ content: "수정됐습니다" });
     } catch (error) {
       if (error instanceof Error) alert(error.message);
     }

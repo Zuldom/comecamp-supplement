@@ -26,32 +26,27 @@ export const useDeleteQuestionAnswer = () => {
     IMutationDeleteUseditemQuestionAnswerArgs
   >(DELETE_QUESTION_ANSWER);
 
-  const deleteQuestionAnswer = (useditemQuestionAnswerId) => async (event) => {
-    try {
-      await deleteUseditemQuestionAnswer({
-        variables: {
-          useditemQuestionAnswerId,
-        },
-        update(cache, { data }) {
-          cache.modify({
-            fields: {
-              deleteUseditemQuestionAnswers: (prev: IRef[], { readField }) => {
-                const deleteId = data?.deleteUseditemQuestionAnswer;
-
-                const filteredPrev = prev.filter(
-                  (el: any) => readField("_id", el) !== deleteId
-                );
-
-                return [...filteredPrev];
+  const deleteQuestionAnswer =
+    (useditemQuestionAnswerId, useditemQuestionId) => async (event) => {
+      try {
+        await deleteUseditemQuestionAnswer({
+          variables: {
+            useditemQuestionAnswerId,
+          },
+          refetchQueries: [
+            {
+              query: FETCH_USED_ITEM_QUESTION_ANSWERS,
+              variables: {
+                page: Number(1),
+                useditemQuestionId,
               },
             },
-          });
-        },
-      });
-    } catch (error) {
-      if (error instanceof Error) alert(error.message);
-    }
-  };
+          ],
+        });
+      } catch (error) {
+        if (error instanceof Error) alert(error.message);
+      }
+    };
   return {
     deleteQuestionAnswer,
   };
