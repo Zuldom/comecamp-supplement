@@ -169,3 +169,8 @@ export const MapTitle = styled.div`
   font-weight: 700;
   font-size: 32px;
 `;
+
+export const DetailMapImg = styled.div`
+  width: 1476px;
+  height: 791px;
+`;

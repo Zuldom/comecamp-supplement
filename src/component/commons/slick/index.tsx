@@ -25,7 +25,19 @@ const SliderWrapper = styled(Slider)`
 `;
 const SlickImg = styled.div`
   height: 750px;
-  background: lightgray;
+  background: red;
+`;
+const SlickImg2 = styled.div`
+  height: 750px;
+  background: green;
+`;
+const SlickImg3 = styled.div`
+  height: 750px;
+  background: yellow;
+`;
+const SlickImg4 = styled.div`
+  height: 750px;
+  background: skyblue;
 `;
 const Img = styled.img``;
 
@@ -41,23 +53,17 @@ export default function Slick() {
     <div>
       <SliderWrapper {...settings}>
         <SlickImg>
-          <Img src="https://post-phinf.pstatic.net/MjAxODExMTlfOCAg/MDAxNTQyNjIzODMwNjAx.IhZUT2K9rG2r9r4vaKxcwDNc_D1XAqU2DPvMYJs0YNQg.8EDzF-0t82RbWsqxUGfJp5n7S4bGkB3K4a8Pxh1SVm4g.PNG/New-Balance-Black-Logo1972.png?type=w1200" />
+          <h3>1</h3>
         </SlickImg>
-        <div>
+        <SlickImg2>
           <h3>2</h3>
-        </div>
-        <div>
+        </SlickImg2>
+        <SlickImg3>
           <h3>3</h3>
-        </div>
-        <div>
+        </SlickImg3>
+        <SlickImg4>
           <h3>4</h3>
-        </div>
-        <div>
-          <h3>5</h3>
-        </div>
-        <div>
-          <h3>6</h3>
-        </div>
+        </SlickImg4>
       </SliderWrapper>
     </div>
   );

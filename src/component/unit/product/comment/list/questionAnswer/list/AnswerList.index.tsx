@@ -40,7 +40,7 @@ export default function QuestionAnswer(props: IProps) {
                 <S.ReplyTitle>답변</S.ReplyTitle>
                 {infoUser._id ===
                   data?.fetchUseditemQuestionAnswers[idx].user._id && (
-                  <>
+                  <S.IconBox>
                     <EditIcon onClick={onClickToggleEdit} />
                     <CloseIcon
                       onClick={deleteQuestionAnswer(
@@ -48,7 +48,7 @@ export default function QuestionAnswer(props: IProps) {
                         props.useditemQuestionId
                       )}
                     />
-                  </>
+                  </S.IconBox>
                 )}
                 <S.ReplyDate>{getDate(el.createdAt)}</S.ReplyDate>
                 <S.ReplyContent>{el?.contents}</S.ReplyContent>

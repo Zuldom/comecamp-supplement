@@ -26,5 +26,5 @@ export const ReplyContent = styled.div`
 
 export const IconBox = styled.div`
   display: flex;
-  gap: 40px;
+  justify-content: flex-end;
 `;
