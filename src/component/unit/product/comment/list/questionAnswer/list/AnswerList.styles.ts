@@ -19,9 +19,11 @@ export const ReplyDate = styled.div`
 `;
 
 export const ReplyContent = styled.div`
+  width: 1460px;
   font-weight: 400;
   font-size: 15px;
   padding-bottom: 15px;
+  word-break: break-all;
 `;
 
 export const IconBox = styled.div`

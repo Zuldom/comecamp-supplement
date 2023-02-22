@@ -33,33 +33,6 @@ export default function QuestionAnswer(props: IProps) {
     console.log(isEditRelply);
   };
 
-  // const onLoadMore = () => {
-  //   if (data === undefined) return;
-
-  //   void fetchMore({
-  //     variables: {
-  //       page: Number(
-  //         Math.ceil(data.fetchUseditemQuestionAnswers.length / 10) + 1
-  //       ),
-  //     },
-  //     updateQuery(prev, { fetchMoreResult }) {
-  //       if (fetchMoreResult.fetchUseditemQuestionAnswers === undefined) {
-  //         return {
-  //           fetchUseditemQuestionAnswers: [
-  //             ...prev.fetchUseditemQuestionAnswers,
-  //           ],
-  //         };
-  //       }
-  //       return {
-  //         fetchUseditemQuestions: [
-  //           ...prev.fetchUseditemQuestionAnswers,
-  //           ...fetchMoreResult.fetchUseditemQuestionAnswers,
-  //         ],
-  //       };
-  //     },
-  //   });
-  // };
-
   const onLoadMore = () => {
     if (!data) return;
 
