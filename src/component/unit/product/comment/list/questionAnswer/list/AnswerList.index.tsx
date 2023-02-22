@@ -11,6 +11,7 @@ import { CloseIcon, EditIcon } from "../../CommentList.styles";
 import AnswerWrite from "../write/AnswerWrite.index";
 import { CancleBtn } from "../write/AnswerWrite.styles";
 import * as S from "./AnswerList.styles";
+import InfiniteScroll from "react-infinite-scroller";
 
 interface IProps {
   useditemQuestionId: string;
@@ -19,7 +20,9 @@ interface IProps {
 
 export default function QuestionAnswer(props: IProps) {
   const router = useRouter();
-  const { data } = useFetchUseditemQuestionAnswers(props.useditemQuestionId);
+  const { data, fetchMore } = useFetchUseditemQuestionAnswers(
+    props.useditemQuestionId
+  );
   const { deleteQuestionAnswer } = useDeleteQuestionAnswer();
   const [isEditRelply, setIsEditRelply] = useState(false);
   const [infoUser] = useRecoilState(infoUserState);
@@ -30,44 +33,110 @@ export default function QuestionAnswer(props: IProps) {
     console.log(isEditRelply);
   };
 
+  // const onLoadMore = () => {
+  //   if (data === undefined) return;
+
+  //   void fetchMore({
+  //     variables: {
+  //       page: Number(
+  //         Math.ceil(data.fetchUseditemQuestionAnswers.length / 10) + 1
+  //       ),
+  //     },
+  //     updateQuery(prev, { fetchMoreResult }) {
+  //       if (fetchMoreResult.fetchUseditemQuestionAnswers === undefined) {
+  //         return {
+  //           fetchUseditemQuestionAnswers: [
+  //             ...prev.fetchUseditemQuestionAnswers,
+  //           ],
+  //         };
+  //       }
+  //       return {
+  //         fetchUseditemQuestions: [
+  //           ...prev.fetchUseditemQuestionAnswers,
+  //           ...fetchMoreResult.fetchUseditemQuestionAnswers,
+  //         ],
+  //       };
+  //     },
+  //   });
+  // };
+
+  const onLoadMore = () => {
+    if (!data) return;
+
+    void fetchMore({
+      variables: {
+        page: Number(
+          Math.ceil(data?.fetchUseditemQuestionAnswers.length / 10) + 1
+        ),
+      },
+      updateQuery(prev, { fetchMoreResult }) {
+        if (fetchMoreResult.fetchUseditemQuestionAnswers === undefined) {
+          return {
+            fetchUseditemQuestionAnswers: [
+              ...prev.fetchUseditemQuestionAnswers,
+            ],
+          };
+        }
+        return {
+          fetchUseditemQuestionAnswers: [
+            ...prev.fetchUseditemQuestionAnswers,
+            ...fetchMoreResult.fetchUseditemQuestionAnswers,
+          ],
+        };
+      },
+    });
+  };
+
+  console.log(isEditRelply);
   return (
     <>
-      {data?.fetchUseditemQuestionAnswers ? (
-        data.fetchUseditemQuestionAnswers.map((el, idx) => (
-          <S.ReplyWrapper key={el._id}>
-            {!isEditRelply ? (
-              <>
-                <S.ReplyTitle>답변</S.ReplyTitle>
-                {infoUser._id ===
-                  data?.fetchUseditemQuestionAnswers[idx].user._id && (
-                  <S.IconBox>
-                    <EditIcon onClick={onClickToggleEdit} />
-                    <CloseIcon
-                      onClick={deleteQuestionAnswer(
-                        String(data.fetchUseditemQuestionAnswers[idx]._id),
-                        props.useditemQuestionId
-                      )}
-                    />
-                  </S.IconBox>
-                )}
-                <S.ReplyDate>{getDate(el.createdAt)}</S.ReplyDate>
-                <S.ReplyContent>{el?.contents}</S.ReplyContent>
-              </>
-            ) : (
-              <>
-                <AnswerWrite
-                  defaultValue={data.fetchUseditemQuestionAnswers[idx].contents}
-                  isEditRelply={isEditRelply}
-                  setIsEditRelply={setIsEditRelply}
-                  QuestionAnswerId={data.fetchUseditemQuestionAnswers[idx]._id}
-                />
-              </>
-            )}
-          </S.ReplyWrapper>
-        ))
-      ) : (
-        <></>
-      )}
+      <InfiniteScroll
+        pageStart={0}
+        loadMore={onLoadMore}
+        hasMore={true}
+        useWindow={true}
+      >
+        {data?.fetchUseditemQuestionAnswers ? (
+          data.fetchUseditemQuestionAnswers.map((el, idx) => (
+            <S.ReplyWrapper key={el._id}>
+              {!isEditRelply ? (
+                <>
+                  <S.ReplyTitle>답변</S.ReplyTitle>
+                  {infoUser._id ===
+                    data?.fetchUseditemQuestionAnswers[idx].user._id && (
+                    <S.IconBox>
+                      <EditIcon onClick={onClickToggleEdit} />
+                      <CloseIcon
+                        onClick={deleteQuestionAnswer(
+                          String(data.fetchUseditemQuestionAnswers[idx]._id),
+                          props.useditemQuestionId
+                        )}
+                      />
+                    </S.IconBox>
+                  )}
+                  <S.ReplyDate>{getDate(el.createdAt)}</S.ReplyDate>
+                  <S.ReplyContent>{el?.contents}</S.ReplyContent>
+                </>
+              ) : (
+                <>
+                  <AnswerWrite
+                    defaultValue={
+                      data.fetchUseditemQuestionAnswers[idx].contents
+                    }
+                    isEditRelply={isEditRelply}
+                    setIsEditRelply={setIsEditRelply}
+                    QuestionAnswerId={
+                      data.fetchUseditemQuestionAnswers[idx]._id
+                    }
+                  />
+                </>
+              )}
+            </S.ReplyWrapper>
+          ))
+        ) : (
+          <></>
+        )}
+      </InfiniteScroll>
     </>
   );
 }

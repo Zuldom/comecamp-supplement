@@ -24,7 +24,7 @@ export const FETCH_USED_ITEM_QUESTION_ANSWERS = gql`
 
 export const useFetchUseditemQuestionAnswers = (useditemQuestionId: string) => {
   const router = useRouter();
-  const { data, loading, error } = useQuery<
+  const { data, fetchMore } = useQuery<
     Pick<IQuery, "fetchUseditemQuestionAnswers">,
     IQueryFetchUseditemQuestionAnswersArgs
   >(FETCH_USED_ITEM_QUESTION_ANSWERS, {
@@ -35,5 +35,6 @@ export const useFetchUseditemQuestionAnswers = (useditemQuestionId: string) => {
   });
   return {
     data,
+    fetchMore,
   };
 };

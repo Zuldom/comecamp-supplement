@@ -14,10 +14,6 @@ const DELETE_QUESTION_ANSWER = gql`
   }
 `;
 
-interface IRef {
-  __ref: string;
-}
-
 export const useDeleteQuestionAnswer = () => {
   const router = useRouter();
 
